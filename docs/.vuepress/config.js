@@ -1,6 +1,6 @@
 module.exports = {
 	title: '思考学习仓库',
-	base: '/back-end-think/',
+	base: '/back-end/',
 	shouldPrefetch: () => false,
 	description: '思考学习仓库沉淀',
 	themeConfig: {
@@ -81,7 +81,7 @@ module.exports = {
 		                    collapsable: true,
 		                    children: [
 						'/back-end-basic/java网络/socket.md',
-						'/back-end-basic/java网络/tcp-udp.md',
+						'/back-end-basic/java网络/tcp-sudp.md',
 						'/back-end-basic/java网络/rpc.md',
 		                    ]
 		                }, 
