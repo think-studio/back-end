@@ -81,7 +81,7 @@ module.exports = {
 		                    collapsable: true,
 		                    children: [
 						'/back-end-basic/java网络/socket.md',
-						'/back-end-basic/java网络/tcp-sudp.md',
+						'/back-end-basic/java网络/tcp-udp.md',
 						'/back-end-basic/java网络/rpc.md',
 		                    ]
 		                }, 
