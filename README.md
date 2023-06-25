@@ -1,82 +1,50 @@
 # 后端知识沉淀
 
-## java模块
+## 介绍说明
 
-1. 基础包篇章
-2. 集合篇章
-3. IO流篇章
-4. 线程篇章
-5. 网络篇章
-6. jvm篇章
-7. 优秀的jar包篇章
+分支使用:  learn-warehouse
 
-## 微服务模块
+通过 .github/workflows下的deploy.yml借助github帮我们部署
 
-- RPC篇章
-- SpringCloud Eureka篇章
-- SpringCloudAlibaba篇章
-- DDD或者洋葱架构等篇章
-- K8S+微服务篇章
+然后采用github pages来进行部署
 
-## 中间件篇章
+建议在使用魔法的情况下进行访问
 
-1. 分布式注册中心
-   - Eureka
-   - Nacos
-2.  分布式调度中心
-   - xxl-job
-   - elastic-job
-3. 分布式消息中间件
-   - Kafka
-   - RocketMQ
-4. 分布式配置中心
-   - Aopllo
-   - Nacos
-5.  分布式限流熔断
-   - Hystrix
-   - Sentinel
-6.  分布式事物
-   - Seate
-7.  分库分表
-   - MyCat
-   - ShardingJDBC
-8.  分布式缓存
-   - Redis
+[vuepress](https://vuepress.vuejs.org/zh/guide/) 我们使用的vuepress进行管理
 
-## 数据库
 
-### OLTP
 
-1. mysql
-2. mongodb
+## 本地开发
 
-### OLAP
+node:  v14.12.0
 
-1. es
-2. clickhouse
-3. drios
+node 建议使用 nvm来进行统一的依赖管理
 
-## 算法
 
-### 常见数据结构
 
-1. 数组
-2. hash表
-3. 堆
-4. 栈
-5. 树
-6. 图
+依赖安装 :  npm install
 
-### 常见算法
+然后执行： npm run dev
 
-1. 递归算法
-2. 贪心算法
 
-## 云原生
 
-1. docker
-2. k8s
-3. 云原生架构
-4. Devops
-5. 监控/日志
+## 配置说明
+
+在 docs 下有一个隐藏的文件夹 .vuepress ; 其中有一个 config.js 来进行管理
+
+
+
+nav : 配置顶部的导航
+
+sidebar： 根据顶部的导航 url 来配置点击顶部的展示侧边的导航
+
+children:  没在对应的路径添加一个文件,就在此处进行配置
+
+
+
+添加完后,可在本地看执行的效果
+
+
+
+
 
