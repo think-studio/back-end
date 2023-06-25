@@ -57,6 +57,7 @@ module.exports = {
 		                    title: 'java线程',
 		                    collapsable: true,
 		                    children: [
+						'/back-end-basic/java线程/01-JMM&Volatile.md',
 						'/back-end-basic/java线程/thread.md',
 						'/back-end-basic/java线程/threadLocal.md',
 						'/back-end-basic/java线程/Atomic系列.md',
@@ -69,7 +70,6 @@ module.exports = {
 						'/back-end-basic/java线程/ForkJoinPool.md',
 						'/back-end-basic/java线程/ThreadPoolExecutor.md',
 						'/back-end-basic/java线程/synchronized.md',
-						'/back-end-basic/java线程/volatile.md',
 						'/back-end-basic/java线程/cas.md',
 						'/back-end-basic/java线程/CHL队列.md',
 						'/back-end-basic/java线程/Disruptor.md',
