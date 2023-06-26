@@ -14,7 +14,7 @@
 
 ​        线程、工作内存、主内存的工作交互图：
 
-![JMM规范示意图](D:\GitHub\think-studio\back-end\docs\img\JMM规范示意图.png)
+![JMM规范示意图](/assets/img/threads/JMM规范示意图.png)
 
 ​         每个线程都有自己独有的工作内存，JMM允许线程访问主内存中的共享变量，并将其拷贝到自己独有的工作内存中，对变量进行操作后，再将共享变量副本写回到主内存。
 
@@ -64,7 +64,7 @@
 
 4.3 数据从主内存到工作内存，再回到主内存的示意图：
 
-![内存数据同步流程](D:\GitHub\think-studio\back-end\docs\img\内存数据同步流程.png)
+![内存数据同步流程](/assets/img/threads/内存数据同步流程.png)
 
 ## 5. JMM中的happens-before原则
 
