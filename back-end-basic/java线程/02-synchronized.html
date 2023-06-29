@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>synchronized | 思考学习仓库</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    
+    <meta name="description" content="思考学习仓库沉淀">
+    
+    <link rel="preload" href="/back-end/assets/css/0.styles.e1ce56f9.css" as="style"><link rel="preload" href="/back-end/assets/js/app.95f5ae38.js" as="script"><link rel="preload" href="/back-end/assets/js/2.733019b2.js" as="script"><link rel="preload" href="/back-end/assets/js/13.d032629b.js" as="script">
+    <link rel="stylesheet" href="/back-end/assets/css/0.styles.e1ce56f9.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/back-end/" class="home-link router-link-active"><!----> <span class="site-name">思考学习仓库</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/back-end/" class="nav-link">
+  思考学习仓库
+</a></div><div class="nav-item"><a href="/back-end/back-end-basic/" class="nav-link router-link-active">
+  java基础
+</a></div><div class="nav-item"><a href="/back-end/middleware/" class="nav-link">
+  中间件
+</a></div><div class="nav-item"><a href="/back-end/spring/" class="nav-link">
+  Spring框架
+</a></div><div class="nav-item"><a href="/back-end/microservices/" class="nav-link">
+  微服务框架
+</a></div><div class="nav-item"><a href="/back-end/database/" class="nav-link">
+  数据库篇章
+</a></div> <a href="https://github.com/think-studio/back-end" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/back-end/" class="nav-link">
+  思考学习仓库
+</a></div><div class="nav-item"><a href="/back-end/back-end-basic/" class="nav-link router-link-active">
+  java基础
+</a></div><div class="nav-item"><a href="/back-end/middleware/" class="nav-link">
+  中间件
+</a></div><div class="nav-item"><a href="/back-end/spring/" class="nav-link">
+  Spring框架
+</a></div><div class="nav-item"><a href="/back-end/microservices/" class="nav-link">
+  微服务框架
+</a></div><div class="nav-item"><a href="/back-end/database/" class="nav-link">
+  数据库篇章
+</a></div> <a href="https://github.com/think-studio/back-end" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>java集合</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>java流</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>java线程</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/back-end/back-end-basic/java线程/01-JMM&amp;Volatile.html" class="sidebar-link">JMM&amp;volatile</a></li><li><a href="/back-end/back-end-basic/java线程/02-synchronized.html" class="active sidebar-link">synchronized</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/back-end/back-end-basic/java线程/02-synchronized.html#_1-临界区" class="sidebar-link">1. 临界区</a></li><li class="sidebar-sub-header"><a href="/back-end/back-end-basic/java线程/02-synchronized.html#_2-竞态条件" class="sidebar-link">2. 竞态条件</a></li><li class="sidebar-sub-header"><a href="/back-end/back-end-basic/java线程/02-synchronized.html#_3-synchronized的使用" class="sidebar-link">3. Synchronized的使用</a></li><li class="sidebar-sub-header"><a href="/back-end/back-end-basic/java线程/02-synchronized.html#_4-synchronized的原理分析" class="sidebar-link">4. Synchronized的原理分析</a></li><li class="sidebar-sub-header"><a href="/back-end/back-end-basic/java线程/02-synchronized.html#_5-synchronized编译后的分析" class="sidebar-link">5. Synchronized编译后的分析</a></li><li class="sidebar-sub-header"><a href="/back-end/back-end-basic/java线程/02-synchronized.html#_6-monitor-管程-监视器" class="sidebar-link">6. Monitor（管程/监视器）</a></li><li class="sidebar-sub-header"><a href="/back-end/back-end-basic/java线程/02-synchronized.html#_6-java对象内存布局" class="sidebar-link">6. java对象内存布局</a></li><li class="sidebar-sub-header"><a href="/back-end/back-end-basic/java线程/02-synchronized.html#_7-synchronized的锁优化" class="sidebar-link">7. Synchronized的锁优化</a></li><li class="sidebar-sub-header"><a href="/back-end/back-end-basic/java线程/02-synchronized.html#_11-锁状态总结" class="sidebar-link">11. 锁状态总结</a></li><li class="sidebar-sub-header"><a href="/back-end/back-end-basic/java线程/02-synchronized.html#_12-synchronized和reentrantlock对比" class="sidebar-link">12. Synchronized和ReentrantLock对比</a></li></ul></li><li><a href="/back-end/back-end-basic/java线程/thread.html" class="sidebar-link">thread</a></li><li><a href="/back-end/back-end-basic/java线程/threadLocal.html" class="sidebar-link">threadLocal</a></li><li><a href="/back-end/back-end-basic/java线程/Atomic系列.html" class="sidebar-link">Atomic系列</a></li><li><a href="/back-end/back-end-basic/java线程/AbstractQueuedSynchronizer.html" class="sidebar-link">AbstractQueuedSynchronizer</a></li><li><a href="/back-end/back-end-basic/java线程/ReentrantLock.html" class="sidebar-link">ReentrantLock</a></li><li><a href="/back-end/back-end-basic/java线程/ReentrantReadWriteLock.html" class="sidebar-link">ReentrantReadWriteLock</a></li><li><a href="/back-end/back-end-basic/java线程/StampedLock.html" class="sidebar-link">StampedLock</a></li><li><a href="/back-end/back-end-basic/java线程/CountDownLatch.html" class="sidebar-link">CountDownLatch</a></li><li><a href="/back-end/back-end-basic/java线程/CyclicBarrier.html" class="sidebar-link">CyclicBarrier</a></li><li><a href="/back-end/back-end-basic/java线程/ForkJoinPool.html" class="sidebar-link">ForkJoinPool</a></li><li><a href="/back-end/back-end-basic/java线程/ThreadPoolExecutor.html" class="sidebar-link">ThreadPoolExecutor</a></li><li><a href="/back-end/back-end-basic/java线程/cas.html" class="sidebar-link">cas</a></li><li><a href="/back-end/back-end-basic/java线程/CHL队列.html" class="sidebar-link">CHL队列</a></li><li><a href="/back-end/back-end-basic/java线程/Disruptor.html" class="sidebar-link">Disruptor</a></li><li><a href="/back-end/back-end-basic/java线程/java内存模型.html" class="sidebar-link">java内存模型</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>java网络</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>jvm</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="synchronized"><a href="#synchronized" class="header-anchor">#</a> synchronized</h1> <h2 id="_1-临界区"><a href="#_1-临界区" class="header-anchor">#</a> 1. 临界区</h2> <p>1.1 一个程序运行多个线程本身是没有问题的</p> <p>1.2 问题出在多个线程访问共享资源</p> <p>1.2.1 多个线程读共享资源其实也没有问题</p> <p>1.2.2 在多个线程对共享资源读写操作时发生指令交错，就会出现问题。</p> <p>一段代码块内如果存在对共享资源的多线程读写操作，称这段代码块为临界区，其共享资源为临界资源。</p> <h2 id="_2-竞态条件"><a href="#_2-竞态条件" class="header-anchor">#</a> 2. 竞态条件</h2> <p>​		多个线程在临界区内执行，由于代码的执行序列不同而导致结果无法预测，称之为发生了竞态条件。</p> <p>​		为了避免临界区的竞态条件，有多种手段可以达到：</p> <p>​				阻塞式的解决方案：synchronized,lock</p> <p>​				非阻塞式的解决方案：原子变量</p> <h2 id="_3-synchronized的使用"><a href="#_3-synchronized的使用" class="header-anchor">#</a> 3. Synchronized的使用</h2> <p>​		synchronized同步块式java提供的一种原子性内置锁，Java中的每个对象，都可以把它当作一个同步锁来使用，这些java内置的使用者看不到的锁被称为内置锁，也叫做监视器锁。</p> <p>​		加锁方式：</p> <p><img src="D:%5CGitHub%5Cthink-studio%5Cback-end%5Cdocs.vuepress%5Cpublic%5Cassets%5Cimg%5Cthreads%5Csynchronized.png" alt="synchronized"></p> <h2 id="_4-synchronized的原理分析"><a href="#_4-synchronized的原理分析" class="header-anchor">#</a> 4. Synchronized的原理分析</h2> <p>​		synchronized是JVM内置锁，基于Monitor机制实现，依赖底层操作系统的互斥原语Mutex（互斥量），它是一个重量级锁，性能较低。JVM内置锁在1.5之后版本做了重大的 优化，如锁粗化（Lock Coarsening）、锁消除（Lock Elimination）、轻量级锁（Lightweight Locking）、偏向锁（Biased Locking）、自适应自旋（Adaptive Spinning）等技术来减少锁操作的开销，内置锁的并发性能已经基本与lock持平。</p> <p>​		Java虚拟机通过一个同步结构支持方法和方法中的指令序列的同步：monitor.</p> <p>​		同步方法是通过方法中的access_flags中设置ACC_SYNCHRONIZED标志来实现；同步代码块是通过monitorenter和monitorexit来实现。两个指令的执行是JVM通过调用操作系统的互斥原语mutex来实现，被阻塞的线程会被挂起、等待重新调度，会导致&quot;用户态和 内核态&quot;两个态之间来回切换，对性能有较大影响。</p> <h2 id="_5-synchronized编译后的分析"><a href="#_5-synchronized编译后的分析" class="header-anchor">#</a> 5. Synchronized编译后的分析</h2> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SyschronizedTest</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span> counter <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        counter<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">incrementNonStatic</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        counter<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span>  <span class="token keyword">void</span> <span class="token function">incrementCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            counter<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>E:\IdeaProjects\jvm-project\src\main\java\com\example\lock&gt;javac  SyschronizedTest.java
+
+E:\IdeaProjects\jvm-project\src\main\java\com\example\lock&gt;javap -v  -c  SyschronizedTest.class
+Classfile /E:/IdeaProjects/jvm-project/src/main/java/com/example/lock/SyschronizedTest.class
+  Last modified 2023-6-27; size 623 bytes
+  MD5 checksum 9f9c58eafd238e6676be54958d249f2f
+  Compiled from &quot;SyschronizedTest.java&quot;
+public class com.example.lock.SyschronizedTest
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #4.#21         // java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+   #2 = Fieldref           #3.#22         // com/example/lock/SyschronizedTest.counter:I
+   #3 = Class              #23            // com/example/lock/SyschronizedTest
+   #4 = Class              #24            // java/lang/Object
+   #5 = Utf8               counter
+   #6 = Utf8               I
+   #7 = Utf8               &lt;init&gt;
+   #8 = Utf8               ()V
+   #9 = Utf8               Code
+  #10 = Utf8               LineNumberTable
+  #11 = Utf8               increment
+  #12 = Utf8               incrementNonStatic
+  #13 = Utf8               incrementCode
+  #14 = Utf8               StackMapTable
+  #15 = Class              #23            // com/example/lock/SyschronizedTest
+  #16 = Class              #24            // java/lang/Object
+  #17 = Class              #25            // java/lang/Throwable
+  #18 = Utf8               &lt;clinit&gt;
+  #19 = Utf8               SourceFile
+  #20 = Utf8               SyschronizedTest.java
+  #21 = NameAndType        #7:#8          // &quot;&lt;init&gt;&quot;:()V
+  #22 = NameAndType        #5:#6          // counter:I
+  #23 = Utf8               com/example/lock/SyschronizedTest
+  #24 = Utf8               java/lang/Object
+  #25 = Utf8               java/lang/Throwable
+{
+  public com.example.lock.SyschronizedTest();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+         4: return
+      LineNumberTable:
+        line 3: 0
+
+  public static synchronized void increment();
+    descriptor: ()V
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_SYNCHRONIZED
+    Code:
+      stack=2, locals=0, args_size=0
+         0: getstatic     #2                  // Field counter:I
+         3: iconst_1
+         4: iadd
+         5: putstatic     #2                  // Field counter:I
+         8: return
+      LineNumberTable:
+        line 8: 0
+        line 9: 8
+
+  public synchronized void incrementNonStatic();
+    descriptor: ()V
+    flags: ACC_PUBLIC, ACC_SYNCHRONIZED
+    Code:
+      stack=2, locals=1, args_size=1
+         0: getstatic     #2                  // Field counter:I
+         3: iconst_1
+         4: iadd
+         5: putstatic     #2                  // Field counter:I
+         8: return
+      LineNumberTable:
+        line 12: 0
+        line 13: 8
+
+  public void incrementCode();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=1
+         0: aload_0
+         1: dup
+         2: astore_1
+         3: monitorenter
+         4: getstatic     #2                  // Field counter:I
+         7: iconst_1
+         8: iadd
+         9: putstatic     #2                  // Field counter:I
+        12: aload_1
+        13: monitorexit
+        14: goto          22
+        17: astore_2
+        18: aload_1
+        19: monitorexit
+        20: aload_2
+        21: athrow
+        22: return
+      Exception table:
+         from    to  target type
+             4    14    17   any
+            17    20    17   any
+      LineNumberTable:
+        line 16: 0
+        line 17: 4
+        line 18: 12
+        line 19: 22
+      StackMapTable: number_of_entries = 2
+        frame_type = 255 /* full_frame */
+          offset_delta = 17
+          locals = [ class com/example/lock/SyschronizedTest, class java/lang/Object ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 250 /* chop */
+          offset_delta = 4
+
+  static {};
+    descriptor: ()V
+    flags: ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: iconst_0
+         1: putstatic     #2                  // Field counter:I
+         4: return
+      LineNumberTable:
+        line 5: 0
+}
+SourceFile: &quot;SyschronizedTest.java&quot;
+</code></pre></div><p>分析：</p> <p>increment():静态方法上加synchronized关键字,可以看到关键字&quot;flags: ACC_PUBLIC, ACC_STATIC, ACC_SYNCHRONIZED&quot;,这个标识指明了当前方法是一个同步方法，JVM通过这个ACC_SYNCHRONIZED访问标志，来辨别一个方法是否为同步方法，，从而执行相应的同步调用。</p> <p>incrementCode()：使用的是synchronized修饰的代码块，关注指令：</p> <div class="language- extra-class"><pre class="language-text"><code> 3: monitorenter
+ 13: monitorexit
+ 19: monitorexit
+</code></pre></div><p>从字节码可知，synchronized修饰的代码块，是基于进入管程monitorenter和退出管程monitorexit指令实现的，其中monitorenter指令指向同步代码块开始的位置，monitorexit指令指向同步代码块的结束位置。当执行monitorenter指令时，当前线程将试图获取objectref(即对象锁)所对应的monitor的持有权，当objectref的monitor计数器为0，此时线程可以尝试占有monitor,如果将monitor计数器设置为1，则表示获取锁成功。</p> <h2 id="_6-monitor-管程-监视器"><a href="#_6-monitor-管程-监视器" class="header-anchor">#</a> 6. Monitor（管程/监视器）</h2> <p>​		Monitor，直译为”监视器“，而操作系统领域一般翻译为”管程“。管程是指管理共享变量以及对共享变量操作的过程，让它们支持并发。Synchronized关键字和wait()、notify()、notifyAll()这三个方法是Java中实现管程技术的组成部分。</p> <p>​		在管程的发展史上，先后出现过三种不同的管程模型，分别是Hasen模型、Hoare模型和MESA模型。现在正在广泛使用的是MESA模型。MESA模型如图所示：</p> <p><img src="D:%5CGitHub%5Cthink-studio%5Cback-end%5Cdocs.vuepress%5Cpublic%5Cassets%5Cimg%5Cthreads%5CMESA%E6%A8%A1%E5%9E%8B%E5%9B%BE.png" alt="MESA模型图"></p> <p>​		管程中引入了条件变量的概念，而且每个条件变量都对应有一个等待队列。条件变量和等待队列的作用就是解决线程之间同步的问题。</p> <p>​		java中的内置的管程（synchronized）对MESA模型进行了精简。MESA模型中，条件变量可以有多个，Java语言内置的管程里只有一个条件变量。模型如图：</p> <p><img src="D:%5CGitHub%5Cthink-studio%5Cback-end%5Cdocs.vuepress%5Cpublic%5Cassets%5Cimg%5Cthreads%5Csynchronized%E6%A8%A1%E5%9E%8B.png" alt="synchronized模型"></p> <p>​		Monitor机制在java中的实现：java.lang.Object类定义了wait()、notify()、notifyAll()方法，这些方法都是基于ObjectMonitor实现，jvm使用的C++实现的一套机制（hotspot源码ObjectMonitor.hpp）。</p> <div class="language-c++ extra-class"><pre class="language-text"><code>ObjectMonitor() {
+  _header = NULL; //对象头 markOop
+  _count = 0;
+  _waiters = 0,
+  _recursions = 0; // 锁的重入次数
+  _object = NULL; //存储锁对象
+  _owner = NULL; // 标识拥有该monitor的线程（当前获取锁的线程）
+  _WaitSet = NULL; // 等待线程（调用wait）组成的双向循环链表，_WaitSet是第一个节点
+  _WaitSetLock = 0 ;
+  _Responsible = NULL ;
+  _succ = NULL ;
+  _cxq = NULL ; //多线程竞争锁会先存到这个单向链表中 （FILO栈结构）
+  FreeNext = NULL ;
+  _EntryList = NULL ; //存放在进入或重新进入时被阻塞(blocked)的线程 (也是存竞争锁失
+败的线程)
+  _SpinFreq = 0 ;
+  _SpinClock = 0 ;
+  OwnerIsThread = 0 ;
+  _previous_owner_tid = 0;
+}
+
+</code></pre></div><p>​		Monitor是线程私有的数据结构，每一个线程都有一个可用monitor record列表，同时还有一个全局的可用列表。每一个被锁住的对象，都会和一个monitor关联（对象头的MarkWord中的LockWord,指向monitor的起始地址），同时monitor中有一个Owner字段，存放拥有该锁的线程唯一表示。</p> <p>​		Monitor的内部结构：</p> <p><img src="D:%5CGitHub%5Cthink-studio%5Cback-end%5Cdocs.vuepress%5Cpublic%5Cassets%5Cimg%5Cthreads%5Cmonitor%E6%9C%BA%E5%88%B6.png" alt="monitor机制"></p> <p>​		当一个线程需要访问受保护的数据（即需要获取对象的monitor）时，它会首先在entry-set入口队列中排队（这里并不是真正的按照排队顺序），如果没有其他线程正在持有对象的monitor，那么它会和entry-set队列及wait-set队列中的被唤醒的其他线程进行竞争（即通过CPU调度），选出一个线程来获取对象的monitor，执行受保护的代码段，执行完毕后释放monitor,如果已经有线程持有对象的monitor，那么需要等待其释放monitor后再竞争。</p> <p>​		wait-set队列：当一个线程拥有monitor后，如果执行了Object的wait方法，线程就会释放monitor，进入wait-set队列，等待Object的notify方法。当该对象调用了notify方法或者notifyAll方法，wait-set中的线程就会被唤醒，再跟entry-set队列中的线程，一起通过cpu调度来竞争对象的monitor。获取到monitor后，它会去读取它自己保存的PC计数器中的地址，从它调用wait方法的地方开始执行。</p> <h2 id="_6-java对象内存布局"><a href="#_6-java对象内存布局" class="header-anchor">#</a> 6. java对象内存布局</h2> <p>​		java对象内存的布局分为三个区域：对象头、实例数据及对齐填充。</p> <p><img src="D:%5CGitHub%5Cthink-studio%5Cback-end%5Cdocs.vuepress%5Cpublic%5Cassets%5Cimg%5Cthreads%5C%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.png" alt="对象内存布局"></p> <p>​		对象头：存储MarkWork和类型执行（KlassWord）,如果是数组对象，则会存在数组长度（ArrayLength）。</p> <p>​		实例数据：存放当前独享属性成员信息以及父类属性成员信息。</p> <p>​		对齐填充：由于虚拟机要求对象起始地址必须是8byte的整数倍，所以虚拟机会对每个对象做8的倍数填充，可以减少堆内存的碎片空间和方便OS读取。</p> <h3 id="_6-1-对象头详解"><a href="#_6-1-对象头详解" class="header-anchor">#</a> 6.1 对象头详解</h3> <p>对象头</p> <p>Mark Word: 用于存储对象自身运行时的数据，如哈希码（HashCode）、GC分代年龄、锁状态标志位、线程持有的锁、偏向线程ID、偏向事件戳等，这部分数据的长度再32位和64位虚拟机中时不一样的。</p> <p>32位对象头：</p> <p><img src="D:%5CGitHub%5Cthink-studio%5Cback-end%5Cdocs.vuepress%5Cpublic%5Cassets%5Cimg%5Cthreads%5C32%E4%BD%8D%E5%AF%B9%E8%B1%A1%E5%A4%B4.png" alt="32位对象头"></p> <p>64位对象头：</p> <p><img src="D:%5CGitHub%5Cthink-studio%5Cback-end%5Cdocs.vuepress%5Cpublic%5Cassets%5Cimg%5Cthreads%5C64%E4%BD%8D%E5%AF%B9%E8%B1%A1%E5%A4%B4.png" alt="64位对象头"></p> <p>32位Markword示意图：</p> <p><img src="D:%5CGitHub%5Cthink-studio%5Cback-end%5Cdocs.vuepress%5Cpublic%5Cassets%5Cimg%5Cthreads%5C32%E4%BD%8DMarkWord.png" alt="32位MarkWord"></p> <p>64位的MarkWord示意图：</p> <p><img src="D:%5CGitHub%5Cthink-studio%5Cback-end%5Cdocs.vuepress%5Cpublic%5Cassets%5Cimg%5Cthreads%5C64%E4%BD%8DMarkWord.png" alt="64位MarkWord"></p> <p>分析：</p> <p>当对象状态为偏向锁时，MarkWord存储的是偏向的线程ID。</p> <p>当对象状态为轻量级锁时，MarkWord存储的是指向线程栈中LockRecord的指针；</p> <p>LockRecord是什么？</p> <p>因为MarkWord的空间有限，随着对象状态的改变，原本存储在对象头里的一些信息，如分代年龄、hashcode等，没有足够的空间存储，为了保证数据不丢失，就会复制一份MarkWord放在线程栈中，复制过去的MarkWord叫作Displaced Mark Word,同时会配合一根指向对象的指针，形成LockRecord(锁记录)，而原本对象头中的MarkWord，就会存储一根指向LockRecord的指针。</p> <p>MarkWord信息：</p> <p>unused:未使用的空间</p> <p>identity_hashcode:对象最原始的hashcode,即使重写hashcode（）也不会改变。</p> <p>age:对象的GC年龄</p> <p>biased_lock:是否偏向锁的标识。</p> <p>lock：锁标记位</p> <p>ThreadID:持有偏向锁的线程ID</p> <p>epoch:偏向锁的事件戳</p> <p>ptr_to_lock_record:指向线程本地栈中lock_record的指针。</p> <p>ptr_to_heavyweight_monitor:指向堆中monitor对象的指针。</p> <p>注意：synchronized只有升级为重量级锁，才会指向monitor对象</p> <h2 id="_7-synchronized的锁优化"><a href="#_7-synchronized的锁优化" class="header-anchor">#</a> 7. Synchronized的锁优化</h2> <h3 id="_7-1-偏向锁"><a href="#_7-1-偏向锁" class="header-anchor">#</a> 7.1 偏向锁</h3> <p>​		偏向锁是一种针对加锁操作的优化手段，经过研究发现，在大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得，因此为了消除数据在无竞争情况下锁重入（CAS操作）的开销而引入偏向锁。对于没有锁竞争的场合，偏向锁有很好的优化效果。</p> <p>​		当JVM启用了偏向锁模式（jdk6默认开启），新创建对象的mark word中的Thread Id 为0，说明此时处于可偏向但未偏向任何线程，也叫做匿名偏向状态（anonymously biased）.</p> <h4 id="偏向锁延迟偏向"><a href="#偏向锁延迟偏向" class="header-anchor">#</a> 偏向锁延迟偏向</h4> <p>​		偏向锁模式存在偏向锁延迟机制：HotSpot虚拟机在启动后有个4s的延迟才会对每个新建的对象开启偏向锁模式。JVM启动时会进行一系列的复杂活动，比如装载配置，系统类初始化等等。在这个过程中会使用大量synchronized关键字对对象加锁，且这些锁大多数都不是偏向锁。为了减少初始化时间，JVM默认延时加载偏向锁。</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">// 关闭延迟开启偏向锁</span>
+<span class="token operator">-</span><span class="token constant">XX</span><span class="token operator">:</span><span class="token class-name">BiasedLockingStartupDelay</span><span class="token operator">=</span><span class="token number">0</span>
+<span class="token comment">//禁止偏向锁</span>
+<span class="token operator">-</span><span class="token constant">XX</span><span class="token operator">:</span><span class="token operator">-</span><span class="token class-name">UseBiasedLocking</span>
+<span class="token comment">//启用偏向锁</span>
+<span class="token operator">-</span><span class="token constant">XX</span><span class="token operator">:</span><span class="token operator">+</span><span class="token class-name">UseBiasedLocking</span>
+</code></pre></div><h4 id="偏向锁撤销过程"><a href="#偏向锁撤销过程" class="header-anchor">#</a> 偏向锁撤销过程</h4> <ol><li>在一个全局安全点停下拥有锁的线程：安全点(safe point)代表了一个状态，在该状态下所有线程都是暂停的（stop the world），到达全局安全点后，持有偏向锁的线程也被暂停了</li> <li>遍历当前JVM的所有线程，如果存在锁记录的话，需要修复锁记录和MarkWord，使其变成无锁状态；</li> <li>唤醒当前线程，将当前锁升级成轻量级锁。</li></ol> <p>偏向锁撤销的其他方式:</p> <div class="language- extra-class"><pre><code>1.调用对象HashCode:调用锁对象的obj.hashCode()或System.identityHashCode(obj)方法会导致该对象的偏向锁被撤销。因为对于一个对象，其hashcode只会生成一次并保存，偏向锁时没有地方保存hashcode的。
+</code></pre></div><p>​	  1.1 当对象处于可偏向和已偏向的状态下，调用hashcode计算将会使对象再也无法偏向：</p> <p>​	  1.1.1 当对象可偏向时，MarkWord将变成未锁定状态，并只能升级成轻量级锁；</p> <p>​	  1.1.2 当对象正处于偏向锁时，调用HashCode将使偏向锁强制升级成重量级锁。</p> <ol start="2"><li>调用wait/notify:偏向锁状态执行obj.notify()会升级为轻量级锁，调用obj.wait(timeout)会升级为重量级锁。</li></ol> <h3 id="_7-2-轻量级锁"><a href="#_7-2-轻量级锁" class="header-anchor">#</a> 7.2 轻量级锁</h3> <p>​		若偏向锁失败，虚拟机并不会立即升级为重量级锁，它还会尝试使用一种称为轻量级锁的优化手段，此时markword 的结构也变为轻量级锁的结构。轻量级锁适用的场景是线程交替执行同步块的场合，如果存在同一时间多个线程访问同一把锁的场合，就会导致轻量级锁膨胀为重量级锁。</p> <h4 id="_7-2-1-轻量级锁膨胀"><a href="#_7-2-1-轻量级锁膨胀" class="header-anchor">#</a> 7.2.1 轻量级锁膨胀</h4> <div class="language- extra-class"><pre><code>	当膨胀为轻量级锁时，首先根据markword判断是否有线程持有锁，如果有，则在当前线程栈中创建一个lock record复制mark word,并且通过cas机制，把当前线程栈的lock record地址，放到对象头中。如果成功，则说明获取到轻量级锁；如果失败，则说明锁已经被其他线程持有了，此时记录线程的重入次数(把lock record的markword设置为null),此时线程会自旋（自适应自旋），确保在竞争不激烈的情况下，仍然可以不膨胀为真正意义上的重量级锁，从而减少消耗；如果自旋后还未等到锁，则说明目前竞争较重，需要膨胀为重量级锁。
+</code></pre></div><h4 id="_7-2-2-轻量级锁的两种类型的自旋"><a href="#_7-2-2-轻量级锁的两种类型的自旋" class="header-anchor">#</a> 7.2.2 轻量级锁的两种类型的自旋</h4> <h5 id="_7-2-2-1-自旋锁"><a href="#_7-2-2-1-自旋锁" class="header-anchor">#</a> 7.2.2.1 自旋锁</h5> <p>​		自旋锁是指当有另外一个线程来竞争锁时，这个线程会在原地循环等待，而不是把该线程挂起阻塞，直到那个持有锁的线程释放锁之后，这个线程就可以马上尝试获取锁。</p> <div class="language- extra-class"><pre><code>	存在的问题：
+</code></pre></div><p>​				1. 如果同步代码块执行很慢，需要等待很长时间，这时其他线程自旋会消耗大量CPU；</p> <p>​				2. 前一个线程释放锁后，若存在多个线程自旋等待，那就会出现只有一个线程能拿到锁，其他线程还得		继续原地空循环，消耗CPU，甚至一直拿不到锁。</p> <p>​		解决方案：-XX:PreBlockSpin 设置线程空循环的次数，超过次数，就会出现锁升级为重量级锁。默认次数时10次。</p> <h5 id="_7-2-2-2-自适应自旋锁"><a href="#_7-2-2-2-自适应自旋锁" class="header-anchor">#</a> 7.2.2.2 自适应自旋锁</h5> <p>​		自适应自旋锁是指线程空循环的次数并非固定的，而是会动态根据实际情况来改变自旋等待的次数，</p> <p>​		原理：</p> <p>​				1.如果线程1拿到锁后释放了，这时线程2获得了锁，在运行过程中，线程1又过来拿锁，但线程2还未释		放锁，此时线程1只能等待，但虚拟机会作出判断：因线程1刚获得了锁，那么虚拟机会觉得线程1这次的自		旋，也很有可能再次成功的拿到锁，所以会延长线程1的自旋次数。</p> <p>​				2. 如果某一个锁在自旋后，很少成功的获取到锁，那么以后这个线程要获取锁时，是很有可能直接跳过		自旋过程，直接走重量级锁的逻辑，以免空循环等待浪费CPU资源。</p> <h3 id="_7-3-重量级锁"><a href="#_7-3-重量级锁" class="header-anchor">#</a> 7.3 重量级锁</h3> <p>​		重量级锁就是当出现较大竞争、锁膨胀为重量级锁时，对象头的 markword指向堆中的monitor，此时会将线程封装为一个ObjectWaiter对象,并插入到monitor的_cxq队列中，然后挂起当前线程。</p> <h3 id="_7-4-锁的状态分析"><a href="#_7-4-锁的状态分析" class="header-anchor">#</a> 7.4 锁的状态分析</h3> <p>pom.xml 引入包</p> <div class="language-xml extra-class"><pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.openjdk.jol<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>jol-core<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>0.10<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>创建类：ObjectSize</p> <h4 id="_7-4-1-无锁态"><a href="#_7-4-1-无锁态" class="header-anchor">#</a> 7.4.1 无锁态</h4> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ObjectSize</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Object</span> o<span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">ClassLayout</span><span class="token punctuation">.</span><span class="token function">parseInstance</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toPrintable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>java.lang.Object object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0     4        (object header)                           01 00 00 00 (00000001 00000000 00000000 00000000) (1)
+      4     4        (object header)                           00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+      8     4        (object header)                           e5 01 00 f8 (11100101 00000001 00000000 11111000) (-134217243)
+     12     4        (loss due to the next object alignment)
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 4 
+bytes external = 4 bytes total
+</code></pre></div><p>第一行打印的就是当前对象的状态</p> <div class="language- extra-class"><pre class="language-text"><code>00000001 00000000 00000000 00000000
+</code></pre></div><p>操作系统分为大端模式和小端模式，windows和linux都是小端模式，所以要转为大端模式</p> <div class="language- extra-class"><pre class="language-text"><code>00000000 00000000 00000000 00000001
+</code></pre></div><p>结合上图来看，是以001结尾的，可以得出是无锁态</p> <p>加上synchronized 关键字</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ObjectSize</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Object</span> o<span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">ClassLayout</span><span class="token punctuation">.</span><span class="token function">parseInstance</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toPrintable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">ClassLayout</span><span class="token punctuation">.</span><span class="token function">parseInstance</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toPrintable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>运行结果</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span></span>Object</span> object internals<span class="token operator">:</span>
+ <span class="token constant">OFFSET</span>  <span class="token constant">SIZE</span>   <span class="token constant">TYPE</span> <span class="token constant">DESCRIPTION</span>                               <span class="token constant">VALUE</span>
+      <span class="token number">0</span>     <span class="token number">4</span>        <span class="token punctuation">(</span>object header<span class="token punctuation">)</span>                           <span class="token number">01</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token punctuation">(</span><span class="token number">00000001</span> <span class="token number">00000000</span> <span class="token number">00000000</span> <span class="token number">00000000</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+      <span class="token number">4</span>     <span class="token number">4</span>        <span class="token punctuation">(</span>object header<span class="token punctuation">)</span>                           <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token punctuation">(</span><span class="token number">00000000</span> <span class="token number">00000000</span> <span class="token number">00000000</span> <span class="token number">00000000</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+      <span class="token number">8</span>     <span class="token number">4</span>        <span class="token punctuation">(</span>object header<span class="token punctuation">)</span>                           e5 <span class="token number">01</span> <span class="token number">00</span> f8 <span class="token punctuation">(</span><span class="token number">11100101</span> <span class="token number">00000001</span> <span class="token number">00000000</span> <span class="token number">11111000</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">134217243</span><span class="token punctuation">)</span>
+     <span class="token number">12</span>     <span class="token number">4</span>        <span class="token punctuation">(</span>loss due <span class="token keyword">to</span> <span class="token namespace">the</span> next object alignment<span class="token punctuation">)</span>
+<span class="token class-name">Instance</span> size<span class="token operator">:</span> <span class="token number">16</span> bytes
+<span class="token class-name">Space</span> losses<span class="token operator">:</span> <span class="token number">0</span> bytes internal <span class="token operator">+</span> <span class="token number">4</span> bytes external <span class="token operator">=</span> <span class="token number">4</span> bytes total
+
+<span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span></span>Object</span> object internals<span class="token operator">:</span>
+ <span class="token constant">OFFSET</span>  <span class="token constant">SIZE</span>   <span class="token constant">TYPE</span> <span class="token constant">DESCRIPTION</span>                               <span class="token constant">VALUE</span>
+      <span class="token number">0</span>     <span class="token number">4</span>        <span class="token punctuation">(</span>object header<span class="token punctuation">)</span>                           <span class="token number">38</span> f1 <span class="token number">8</span>a <span class="token number">02</span> <span class="token punctuation">(</span><span class="token number">00111000</span> <span class="token number">11110001</span> <span class="token number">10001010</span> <span class="token number">00000010</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token number">42660152</span><span class="token punctuation">)</span>
+      <span class="token number">4</span>     <span class="token number">4</span>        <span class="token punctuation">(</span>object header<span class="token punctuation">)</span>                           <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token punctuation">(</span><span class="token number">00000000</span> <span class="token number">00000000</span> <span class="token number">00000000</span> <span class="token number">00000000</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+      <span class="token number">8</span>     <span class="token number">4</span>        <span class="token punctuation">(</span>object header<span class="token punctuation">)</span>                           e5 <span class="token number">01</span> <span class="token number">00</span> f8 <span class="token punctuation">(</span><span class="token number">11100101</span> <span class="token number">00000001</span> <span class="token number">00000000</span> <span class="token number">11111000</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">134217243</span><span class="token punctuation">)</span>
+     <span class="token number">12</span>     <span class="token number">4</span>        <span class="token punctuation">(</span>loss due <span class="token keyword">to</span> <span class="token namespace">the</span> next object alignment<span class="token punctuation">)</span>
+<span class="token class-name">Instance</span> size<span class="token operator">:</span> <span class="token number">16</span> bytes
+<span class="token class-name">Space</span> losses<span class="token operator">:</span> <span class="token number">0</span> bytes internal <span class="token operator">+</span> <span class="token number">4</span> bytes external <span class="token operator">=</span> <span class="token number">4</span> bytes total
+</code></pre></div><p>分析：第一次是无锁状态，第二次确是轻量级锁</p> <p>按理说应该是先偏向锁，再轻量级锁，那为什么会这样呢？</p> <p>jvm的偏向锁是延迟启动的，大概4s中的时间。jvm中存在大量的map，class，new的启动过程，这时也会有各种锁，默认大概有10个线程，也会有锁的竞争，为了避免造成无谓的偏向锁，升级为轻量级锁，再到重量级锁的锁的升级过程，所以延迟了几秒的启动。</p> <h4 id="_7-4-2-偏向锁"><a href="#_7-4-2-偏向锁" class="header-anchor">#</a> 7.4.2 偏向锁</h4> <p>休眠5s，再创建：</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ObjectSize</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token class-name">TimeUnit</span><span class="token punctuation">.</span><span class="token constant">SECONDS</span><span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token class-name">Object</span> o<span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">ClassLayout</span><span class="token punctuation">.</span><span class="token function">parseInstance</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toPrintable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">ClassLayout</span><span class="token punctuation">.</span><span class="token function">parseInstance</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toPrintable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>运行结果</p> <div class="language- extra-class"><pre class="language-text"><code>java.lang.Object object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0     4        (object header)                           05 00 00 00 (00000101 00000000 00000000 00000000) (5)
+      4     4        (object header)                           00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+      8     4        (object header)                           e5 01 00 f8 (11100101 00000001 00000000 11111000) (-134217243)
+     12     4        (loss due to the next object alignment)
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+java.lang.Object object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0     4        (object header)                           05 38 7c 03 (00000101 00111000 01111100 00000011) (58472453)
+      4     4        (object header)                           00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+      8     4        (object header)                           e5 01 00 f8 (11100101 00000001 00000000 11111000) (-134217243)
+     12     4        (loss due to the next object alignment)
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+
+Process finished with exit code 0
+</code></pre></div><p>这时可以看到第一次是偏向锁，第二次也是偏向锁</p> <div class="language- extra-class"><pre class="language-text"><code>未启动偏向锁，没加锁
+00000001 00000000 00000000 00000000
+开启偏向锁
+无锁状态（匿名偏向，可偏向状态，准备好了可偏向，但还没偏向，因为偏向锁是有线程id的，很明显下面的没有线程id）
+00000101 00000000 00000000 00000000
+有同步块
+00000101 00111000 01111100 00000011
+</code></pre></div><h4 id="_7-4-3-轻量级锁"><a href="#_7-4-3-轻量级锁" class="header-anchor">#</a> 7.4.3 轻量级锁</h4> <p>偏向锁升级为轻量级锁：</p> <div class="language- extra-class"><pre class="language-text"><code>package com.example.thread;
+
+
+import lombok.extern.slf4j.Slf4j;
+import org.openjdk.jol.info.ClassLayout;
+
+@Slf4j
+public class BasicLock {
+
+    public static void main(String[] args) {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Object o = new Object();
+        System.out.println(&quot;1&quot;+ClassLayout.parseInstance(o).toPrintable());
+
+        new Thread(()-&gt;{
+           synchronized (o){
+               System.out.println(&quot;2&quot;+ClassLayout.parseInstance(o).toPrintable());
+           }
+        }).start();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(&quot;3&quot;+ClassLayout.parseInstance(o).toPrintable());
+        new Thread(()-&gt;{
+            synchronized (o){
+                System.out.println(&quot;4&quot;+ClassLayout.parseInstance(o).toPrintable());
+            }
+        }).start();
+    }
+}
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>1java.lang.Object object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0     4        (object header)                           05 00 00 00 (00000101 00000000 00000000 00000000) (5)
+      4     4        (object header)                           00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+      8     4        (object header)                           e5 01 00 f8 (11100101 00000001 00000000 11111000) (-134217243)
+     12     4        (loss due to the next object alignment)
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+2java.lang.Object object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0     4        (object header)                           05 90 70 1e (00000101 10010000 01110000 00011110) (510693381)
+      4     4        (object header)                           00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+      8     4        (object header)                           e5 01 00 f8 (11100101 00000001 00000000 11111000) (-134217243)
+     12     4        (loss due to the next object alignment)
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+3java.lang.Object object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0     4        (object header)                           05 90 70 1e (00000101 10010000 01110000 00011110) (510693381)
+      4     4        (object header)                           00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+      8     4        (object header)                           e5 01 00 f8 (11100101 00000001 00000000 11111000) (-134217243)
+     12     4        (loss due to the next object alignment)
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+4java.lang.Object object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0     4        (object header)                           00 f1 db 1e (00000000 11110001 11011011 00011110) (517730560)
+      4     4        (object header)                           00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+      8     4        (object header)                           e5 01 00 f8 (11100101 00000001 00000000 11111000) (-134217243)
+     12     4        (loss due to the next object alignment)
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+</code></pre></div><p>00000101 00000000 00000000 00000000 可偏向状态，无线程id</p> <p>00000101 10010000 10001100 00011110 偏向锁，有线程id</p> <p>00000101 10010000 10001100 00011110 偏向锁，有线程id</p> <p>00000000 11110001 11011011 0001111  轻量级锁，00 结尾</p> <p>两个线程交替执行，就会出现锁的升级</p> <h4 id="_7-4-4-重量级锁"><a href="#_7-4-4-重量级锁" class="header-anchor">#</a> 7.4.4 重量级锁</h4> <p>重量级锁的使用：</p> <div class="language- extra-class"><pre class="language-text"><code>package com.example.thread;
+
+import org.openjdk.jol.info.ClassLayout;
+
+/**
+ * 重量级锁
+ */
+public class HeavyWeightMonitor {
+
+    public static void main(String[] args) {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Object o = new Object();
+
+        Thread thread1 = new Thread(() -&gt; {
+            synchronized (o) {
+                System.out.println(&quot;thread1 locking&quot;);
+                System.out.println(&quot;1&quot; + ClassLayout.parseInstance(o).toPrintable());
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Thread thread2 = new Thread(() -&gt; {
+            synchronized (o) {
+                System.out.println(&quot;thread2 locking&quot;);
+                System.out.println(&quot;2&quot; + ClassLayout.parseInstance(o).toPrintable());
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread1.start();
+        thread2.start();
+    }
+}
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>thread1 locking
+1java.lang.Object object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0     4        (object header)                           5a 95 90 03 (01011010 10010101 10010000 00000011) (59807066)
+      4     4        (object header)                           00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+      8     4        (object header)                           e5 01 00 f8 (11100101 00000001 00000000 11111000) (-134217243)
+     12     4        (loss due to the next object alignment)
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+thread2 locking
+2java.lang.Object object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0     4        (object header)                           5a 95 90 03 (01011010 10010101 10010000 00000011) (59807066)
+      4     4        (object header)                           00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+      8     4        (object header)                           e5 01 00 f8 (11100101 00000001 00000000 11111000) (-134217243)
+     12     4        (loss due to the next object alignment)
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+</code></pre></div><p>01011010 10010101 10010000 00000011-&gt;   10结尾，重量级锁</p> <p>线程1拿到锁后，休眠2秒，线程2发现拿不到锁，需要自旋，锁竞争升级，转为重量级锁</p> <p>偏向锁:没有地方存放hashcode，当调用hashcode方法时会升级为轻量级锁</p> <p>轻量级锁：线程栈的Replace Lock Record里面存放了hashcode</p> <p>重量级锁：对象头中的markword指向堆中的monitor.</p> <div class="language- extra-class"><pre class="language-text"><code>package com.example.thread;
+
+import org.openjdk.jol.info.ClassLayout;
+
+import java.util.concurrent.TimeUnit;
+
+public class ObjectSize {
+
+    public static void main(String[] args) {
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Object o= new Object();
+        System.out.println(ClassLayout.parseInstance(o).toPrintable());
+        synchronized (o){
+            System.out.println(ClassLayout.parseInstance(o).toPrintable());
+
+        }
+        o.hashCode();
+        System.out.println(ClassLayout.parseInstance(o).toPrintable());
+        synchronized (o){
+            System.out.println(ClassLayout.parseInstance(o).toPrintable());
+
+        }
+    }
+}
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>&quot;D:\Program Files\Java\jdk1.8.0_251\bin\java.exe&quot; &quot;-javaagent:D:\Program Files\JetBrains\IntelliJ IDEA 2019.3.1\lib\idea_rt.jar=9476:D:\Program Files\JetBrains\IntelliJ IDEA 2019.3.1\bin&quot; -Dfile.encoding=UTF-8 -classpath &quot;D:\Program Files\Java\jdk1.8.0_251\jre\lib\charsets.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\deploy.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\ext\access-bridge-64.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\ext\cldrdata.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\ext\dnsns.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\ext\jaccess.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\ext\jfxrt.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\ext\localedata.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\ext\nashorn.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\ext\sunec.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\ext\sunjce_provider.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\ext\sunmscapi.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\ext\sunpkcs11.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\ext\zipfs.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\javaws.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\jce.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\jfr.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\jfxswt.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\jsse.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\management-agent.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\plugin.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\resources.jar;D:\Program Files\Java\jdk1.8.0_251\jre\lib\rt.jar;E:\IdeaProjects\jvm-project\target\classes;C:\Users\Administrator\.m2\repository\org\springframework\boot\spring-boot-starter\2.6.3\spring-boot-starter-2.6.3.jar;C:\Users\Administrator\.m2\repository\org\springframework\boot\spring-boot\2.6.3\spring-boot-2.6.3.jar;C:\Users\Administrator\.m2\repository\org\springframework\spring-context\5.3.15\spring-context-5.3.15.jar;C:\Users\Administrator\.m2\repository\org\springframework\spring-aop\5.3.15\spring-aop-5.3.15.jar;C:\Users\Administrator\.m2\repository\org\springframework\spring-beans\5.3.15\spring-beans-5.3.15.jar;C:\Users\Administrator\.m2\repository\org\springframework\spring-expression\5.3.15\spring-expression-5.3.15.jar;C:\Users\Administrator\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.6.3\spring-boot-autoconfigure-2.6.3.jar;C:\Users\Administrator\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.6.3\spring-boot-starter-logging-2.6.3.jar;C:\Users\Administrator\.m2\repository\ch\qos\logback\logback-classic\1.2.10\logback-classic-1.2.10.jar;C:\Users\Administrator\.m2\repository\ch\qos\logback\logback-core\1.2.10\logback-core-1.2.10.jar;C:\Users\Administrator\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.17.1\log4j-to-slf4j-2.17.1.jar;C:\Users\Administrator\.m2\repository\org\apache\logging\log4j\log4j-api\2.17.1\log4j-api-2.17.1.jar;C:\Users\Administrator\.m2\repository\org\slf4j\jul-to-slf4j\1.7.33\jul-to-slf4j-1.7.33.jar;C:\Users\Administrator\.m2\repository\jakarta\annotation\jakarta.annotation-api\1.3.5\jakarta.annotation-api-1.3.5.jar;C:\Users\Administrator\.m2\repository\org\springframework\spring-core\5.3.15\spring-core-5.3.15.jar;C:\Users\Administrator\.m2\repository\org\springframework\spring-jcl\5.3.15\spring-jcl-5.3.15.jar;C:\Users\Administrator\.m2\repository\org\yaml\snakeyaml\1.29\snakeyaml-1.29.jar;C:\Users\Administrator\.m2\repository\org\projectlombok\lombok\1.18.22\lombok-1.18.22.jar;C:\Users\Administrator\.m2\repository\org\slf4j\slf4j-api\1.7.33\slf4j-api-1.7.33.jar;C:\Users\Administrator\.m2\repository\org\openjdk\jol\jol-core\0.10\jol-core-0.10.jar&quot; com.example.thread.ObjectSize
+java.lang.Object object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0     4        (object header)                           05 00 00 00 (00000101 00000000 00000000 00000000) (5)
+      4     4        (object header)                           00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+      8     4        (object header)                           e5 01 00 f8 (11100101 00000001 00000000 11111000) (-134217243)
+     12     4        (loss due to the next object alignment)
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+java.lang.Object object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0     4        (object header)                           05 38 88 02 (00000101 00111000 10001000 00000010) (42481669)
+      4     4        (object header)                           00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+      8     4        (object header)                           e5 01 00 f8 (11100101 00000001 00000000 11111000) (-134217243)
+     12     4        (loss due to the next object alignment)
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+java.lang.Object object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0     4        (object header)                           01 54 63 ec (00000001 01010100 01100011 11101100) (-329034751)
+      4     4        (object header)                           0a 00 00 00 (00001010 00000000 00000000 00000000) (10)
+      8     4        (object header)                           e5 01 00 f8 (11100101 00000001 00000000 11111000) (-134217243)
+     12     4        (loss due to the next object alignment)
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+java.lang.Object object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0     4        (object header)                           70 f5 b5 00 (01110000 11110101 10110101 00000000) (11924848)
+      4     4        (object header)                           00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+      8     4        (object header)                           e5 01 00 f8 (11100101 00000001 00000000 11111000) (-134217243)
+     12     4        (loss due to the next object alignment)
+Instance size: 16 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+
+Process finished with exit code 0
+</code></pre></div><p>在执行o.hashcode()后，状态变为无锁</p> <p>最后执行同步块，打印的是轻量级锁</p> <h3 id="_8-锁粗化"><a href="#_8-锁粗化" class="header-anchor">#</a> 8. 锁粗化</h3> <p>​		对同一个对象进行反复加锁及解锁，甚至加锁操作出现在循环体中，即使没有出现线程竞争，频繁地进行互斥同步操作也会导致不必要的性能损耗。如果jvm检测到有一连串零碎的操作都是对同一对象的加锁，将会扩大加锁同步的范围（即锁粗化）到整个操作序列的外部。</p> <p>例子1：两个同步块代码之间存在执行很短的逻辑</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doSomethingMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token comment">// 加锁执行</span>
+	<span class="token keyword">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token comment">// do some thing</span>
+	<span class="token punctuation">}</span>
+	<span class="token comment">// 耗时很短的逻辑代码</span>
+	<span class="token comment">// 再次加锁执行</span>
+	<span class="token keyword">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token comment">// do other thing</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>分析：因两块同步操作的代码之间需要做一些其他工作，但这些工作只会花费很少的时间，那么我们就可以把这些工作代码放入锁内，将两个同步代码块合并成一个，以降低多次锁请求、同步、释放带来的系统性能消耗。</p> <p>合并后的代码</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doSomethingMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token comment">// 加锁执行</span>
+	<span class="token keyword">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token comment">// do some thing</span>
+		<span class="token comment">// 耗时很短的逻辑代码</span>
+		<span class="token comment">// do other thing</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>注意：如果不需要同步的代码执行时间较长，就不会做锁粗化。</p> <p>例子2：循环体中的加锁</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doSomethingMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">100000</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token comment">// 加锁执行</span>
+		<span class="token keyword">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+			<span class="token comment">// do some thing</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>合并后：</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doSomethingMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token comment">// 加锁执行</span>
+	<span class="token keyword">synchronized</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">100000</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+			<span class="token comment">// do some thing</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_9-锁消除"><a href="#_9-锁消除" class="header-anchor">#</a> 9. 锁消除</h3> <p>​		锁消除即删除不必要的加锁操作。锁消除时java虚拟机在JIT编译期间，通过对运行上下文的扫描，去除不可能存在共享资源竞争的锁，通过锁消除，可以节省毫无意义的请求锁时间。</p> <p>例如：</p> <p>StringBuffer类的append操作：</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">appendString</span><span class="token punctuation">(</span><span class="token class-name">String</span> s1<span class="token punctuation">,</span> <span class="token class-name">String</span> s2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">StringBuffer</span> sb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>分析：StringBuffer的append是个同步方法，但是append方法中的StringBuffer属于一个局部变量，不可能从该方法中逃逸出现，因此其实这过程时线程安全的，可以将锁消除。</p> <h3 id="_10-逃逸分析"><a href="#_10-逃逸分析" class="header-anchor">#</a> 10. 逃逸分析</h3> <p>​		逃逸分析是一种可以有效减少java程序中同步负载和内存堆分配压力的跨函数全局数据流分析算法。通过逃逸分析，java hotspot编译器能够分析出一个新的对象的引用的使用范围从而决定是否要将这个对象分配到堆上。逃逸分析的基本行为就是分析对象动态作用域。</p> <h4 id="_10-1-方法逃逸"><a href="#_10-1-方法逃逸" class="header-anchor">#</a> 10.1 方法逃逸</h4> <p>​		当一个对象在方法中被定义后，它可能被外部方法所引用，例如作为调用参数传递其他地方中。</p> <h4 id="_10-2-线程逃逸"><a href="#_10-2-线程逃逸" class="header-anchor">#</a> 10.2 线程逃逸</h4> <p>​		这个对象甚至可能被其他线程访问到，如赋值给类变量或者可以在其他线程中访问的实例变量。</p> <h4 id="_10-3-逃逸分析的优点"><a href="#_10-3-逃逸分析的优点" class="header-anchor">#</a> 10.3 逃逸分析的优点</h4> <div class="language- extra-class"><pre><code>	1. 同步省略或锁消除，如果一个对象被发现只能从一个线程被访问到，那么对于这个对象的操作可以不考虑同步。
+	2. 将堆分配转化为栈分配，如果一个对象在子程序中被分配，要使指向该对象的指针永远不会逃逸，对象可能使栈分配的候选，而不是堆分配。
+	3. 分离对象或标量替换，有的对象可能不需要作为一个连续的内存结构存在也可以被访问到，那么对象的部分（或全部）可以不存储在内存，而是存储在CPU寄存器中。
+</code></pre></div><p>JVM逃逸分析的参数：</p> <div class="language- extra-class"><pre class="language-text"><code>‐XX:+DoEscapeAnalysis  //表示开启逃逸分析 (jdk1.8默认开启）
+‐XX:‐DoEscapeAnalysis //表示关闭逃逸分析。
+‐XX:+EliminateAllocations //开启标量替换(默认打开)
+‐XX:+EliminateLocks //开启锁消除(jdk1.8默认开启）
+
+</code></pre></div><h2 id="_11-锁状态总结"><a href="#_11-锁状态总结" class="header-anchor">#</a> 11. 锁状态总结</h2> <p>无锁态：JVM启动后四秒内的普通对象，四秒后的匿名偏向锁对象</p> <p>偏向锁状态：只有一个线程进入临界区</p> <p>轻量级锁状态：多个线程交替进入临界区</p> <p>重量级锁状态：多个线程同时进入临界区</p> <h2 id="_12-synchronized和reentrantlock对比"><a href="#_12-synchronized和reentrantlock对比" class="header-anchor">#</a> 12. Synchronized和ReentrantLock对比</h2> <p>synchronized是基于进入和退出管程monitor实现的，而monitor底层是依赖域OS的Muter Lock,获取锁和释放锁都需要经过系统调用，此时会涉及到用户态和内核态的切换，会经过Ox80中断，经过内核调用后再返回用户态，因此效率较低。</p> <p>ReentrantLock底层实现依赖于特殊的CPU指令，如lock指令和unlock指令，不需要用户态和内核态的切换，所以效率更高。</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/think-studio/back-end/edit/learn-warehouse/docs/back-end-basic/java线程/02-synchronized.md" target="_blank" rel="noopener noreferrer">欢迎来到思考学习仓库,一起沉淀知识</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/back-end/back-end-basic/java线程/01-JMM&amp;Volatile.html" class="prev">
+        JMM&amp;volatile
+      </a></span> <span class="next"><a href="/back-end/back-end-basic/java线程/thread.html">
+        thread
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/back-end/assets/js/app.95f5ae38.js" defer></script><script src="/back-end/assets/js/2.733019b2.js" defer></script><script src="/back-end/assets/js/13.d032629b.js" defer></script>
+  </body>
+</html>
