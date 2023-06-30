@@ -28,7 +28,7 @@
 
 ​		加锁方式：
 
-![synchronized](D:\GitHub\think-studio\back-end\docs\.vuepress\public\assets\img\threads\synchronized.png)
+![synchronized](/back-end/assets/img/threads/synchronized.png)
 
 ## 4. Synchronized的原理分析
 
@@ -212,13 +212,13 @@ incrementCode()：使用的是synchronized修饰的代码块，关注指令：
 
 ​		在管程的发展史上，先后出现过三种不同的管程模型，分别是Hasen模型、Hoare模型和MESA模型。现在正在广泛使用的是MESA模型。MESA模型如图所示：
 
-![MESA模型图](D:\GitHub\think-studio\back-end\docs\.vuepress\public\assets\img\threads\MESA模型图.png)
+![MESA模型图](/back-end/assets/img/threads/MESA模型图.png)
 
 ​		管程中引入了条件变量的概念，而且每个条件变量都对应有一个等待队列。条件变量和等待队列的作用就是解决线程之间同步的问题。
 
 ​		java中的内置的管程（synchronized）对MESA模型进行了精简。MESA模型中，条件变量可以有多个，Java语言内置的管程里只有一个条件变量。模型如图：
 
-![synchronized模型](D:\GitHub\think-studio\back-end\docs\.vuepress\public\assets\img\threads\synchronized模型.png)
+![synchronized模型](/back-end/assets/img/threads/synchronized模型.png)
 
 ​		Monitor机制在java中的实现：java.lang.Object类定义了wait()、notify()、notifyAll()方法，这些方法都是基于ObjectMonitor实现，jvm使用的C++实现的一套机制（hotspot源码ObjectMonitor.hpp）。
 
@@ -250,7 +250,7 @@ ObjectMonitor() {
 
 ​		Monitor的内部结构：
 
-![monitor机制](D:\GitHub\think-studio\back-end\docs\.vuepress\public\assets\img\threads\monitor机制.png)
+![monitor机制](/back-end/assets/img/threads/monitor机制.png)
 
 
 
@@ -262,7 +262,7 @@ ObjectMonitor() {
 
 ​		java对象内存的布局分为三个区域：对象头、实例数据及对齐填充。
 
-![对象内存布局](D:\GitHub\think-studio\back-end\docs\.vuepress\public\assets\img\threads\对象内存布局.png)
+![对象内存布局](/back-end/assets/img/threads/对象内存布局.png)
 
 ​		对象头：存储MarkWork和类型执行（KlassWord）,如果是数组对象，则会存在数组长度（ArrayLength）。
 
@@ -278,19 +278,19 @@ Mark Word: 用于存储对象自身运行时的数据，如哈希码（HashCode�
 
 32位对象头：
 
-![32位对象头](D:\GitHub\think-studio\back-end\docs\.vuepress\public\assets\img\threads\32位对象头.png)
+![32位对象头](/back-end/assets/img/threads/32位对象头.png)
 
 64位对象头：
 
-![64位对象头](D:\GitHub\think-studio\back-end\docs\.vuepress\public\assets\img\threads\64位对象头.png)
+![64位对象头](/back-end/assets/img/threads/64位对象头.png)
 
 32位Markword示意图：
 
-![32位MarkWord](D:\GitHub\think-studio\back-end\docs\.vuepress\public\assets\img\threads\32位MarkWord.png)
+![32位MarkWord](/back-end/assets/img/threads/32位MarkWord.png)
 
 64位的MarkWord示意图：
 
-![64位MarkWord](D:\GitHub\think-studio\back-end\docs\.vuepress\public\assets\img\threads\64位MarkWord.png)
+![64位MarkWord](/back-end/assets/img/threads/64位MarkWord.png)
 
 分析：
 
@@ -912,8 +912,8 @@ public void appendString(String s1, String s2) {
 #### 10.3 逃逸分析的优点
 
   		1. 同步省略或锁消除，如果一个对象被发现只能从一个线程被访问到，那么对于这个对象的操作可以不考虑同步。
-  		2. 将堆分配转化为栈分配，如果一个对象在子程序中被分配，要使指向该对象的指针永远不会逃逸，对象可能使栈分配的候选，而不是堆分配。
-  		3. 分离对象或标量替换，有的对象可能不需要作为一个连续的内存结构存在也可以被访问到，那么对象的部分（或全部）可以不存储在内存，而是存储在CPU寄存器中。
+    		2. 将堆分配转化为栈分配，如果一个对象在子程序中被分配，要使指向该对象的指针永远不会逃逸，对象可能使栈分配的候选，而不是堆分配。
+      		3. 分离对象或标量替换，有的对象可能不需要作为一个连续的内存结构存在也可以被访问到，那么对象的部分（或全部）可以不存储在内存，而是存储在CPU寄存器中。
 
 JVM逃逸分析的参数：
 
@@ -942,10 +942,3 @@ JVM逃逸分析的参数：
 synchronized是基于进入和退出管程monitor实现的，而monitor底层是依赖域OS的Muter Lock,获取锁和释放锁都需要经过系统调用，此时会涉及到用户态和内核态的切换，会经过Ox80中断，经过内核调用后再返回用户态，因此效率较低。
 
 ReentrantLock底层实现依赖于特殊的CPU指令，如lock指令和unlock指令，不需要用户态和内核态的切换，所以效率更高。
-
-
-
-
-
-
-
