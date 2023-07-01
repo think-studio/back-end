@@ -24,7 +24,7 @@ module.exports = {
 		                    title: 'java集合',
 		                    collapsable: true,
 		                    children: [
-						'/back-end-basic/java集合/ArrayList.md',
+						'/back-end-basic/java集合/01-ArrayList源码阅读',
 						'/back-end-basic/java集合/LinkedList.md',
 						'/back-end-basic/java集合/Vector.md',
 						'/back-end-basic/java集合/ArrayDeque.md',
