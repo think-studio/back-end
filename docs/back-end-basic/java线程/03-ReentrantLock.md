@@ -105,7 +105,7 @@ Node节点：是对每个 等待获取锁的线程的封装体。其中包含了
 
 Node节点的示意图：
 
-![AQS_Node](D:\GitHub\think-studio\back-end\docs\.vuepress\public\assets\img\threads\AQS_Node.png)
+![AQS_Node](/back-end/assets/img/threads/AQS_Node.png)
 
 Node源码：
 
@@ -339,11 +339,11 @@ Node是一个同步队列（CLH）:先进先出的双向链表
 
 示意图：
 
-![AQS_Node_0](D:\GitHub\think-studio\back-end\docs\.vuepress\public\assets\img\threads\AQS_Node_0.png)
+![AQS_Node_0](/back-end/assets/img/threads/AQS_Node_0.png)
 
 当t=tail,tail为空时的执行示意图，新建的Node节点，存放再CLH队列的第一位,waitStatus为0，此时head,t，tail都是指向node节点
 
-![AQS_Node_1](D:\GitHub\think-studio\back-end\docs\.vuepress\public\assets\img\threads\AQS_Node_1.png)
+![AQS_Node_1](/back-end/assets/img/threads/AQS_Node_1.png)
 
 当第二次循环，tail不为空，将当前线程(线程2)的节点的前驱节点指向t(新建的node)，再将尾部节点tail指向当前线程的节点，t的后继节点指向当前线程的节点.
 
@@ -452,7 +452,7 @@ shouldParkAfterFailedAcquire:当前线程节点的前驱节点不是头节点或
 
 parkAndCheckInterrupt：将当前线程挂起，即让出CPU资源
 
-![AQS_Node_2](D:\GitHub\think-studio\back-end\docs\.vuepress\public\assets\img\threads\AQS_Node_2.png)
+![AQS_Node_2](/back-end/assets/img/threads/AQS_Node_2.png)
 
 此时head节点的状态为-1（Signal等待 唤醒）。
 
