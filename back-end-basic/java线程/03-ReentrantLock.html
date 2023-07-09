@@ -8,7 +8,7 @@
     
     <meta name="description" content="思考学习仓库沉淀">
     
-    <link rel="preload" href="/back-end/assets/css/0.styles.e1ce56f9.css" as="style"><link rel="preload" href="/back-end/assets/js/app.e2101455.js" as="script"><link rel="preload" href="/back-end/assets/js/2.733019b2.js" as="script"><link rel="preload" href="/back-end/assets/js/14.4726fbb0.js" as="script">
+    <link rel="preload" href="/back-end/assets/css/0.styles.e1ce56f9.css" as="style"><link rel="preload" href="/back-end/assets/js/app.7438c974.js" as="script"><link rel="preload" href="/back-end/assets/js/2.733019b2.js" as="script"><link rel="preload" href="/back-end/assets/js/14.67568e7d.js" as="script">
     <link rel="stylesheet" href="/back-end/assets/css/0.styles.e1ce56f9.css">
   </head>
   <body>
@@ -116,7 +116,7 @@ private transient volatile Node tail;
 // 同步状态标识
 private volatile int state;
 }
-</code></pre></div><p>state:同步状态标识，当状态标识为0时，代表着当前没有线程占用锁资源；当状态标志=0，则代表已有线程占用了锁资源，如果状态标志大于0，则代表着占用锁资源的线程重入过多次，解锁时也需要同样的解锁多次。</p> <p>head为同步队列（CLH）的头部，但需要注意点head节点为空，不存储信息，而tail指向同步队列的尾部。AQS中同步队列（CLH）采用这种方式构建双向链表结构，方便队列 进行增删操作。</p> <p>Node节点：是对每个 等待获取锁的线程的封装体。其中包含了当前执行的线程及线程的状态，如是否阻塞、是否处于等待唤醒、是否中断等。每个Node都有一个前驱节点prev以及后继节点next,这样可以更方便持有锁的线程释放后能快速执行下一个正在等待的线程。</p> <p>Node节点的示意图：</p> <p><img src="D:%5CGitHub%5Cthink-studio%5Cback-end%5Cdocs.vuepress%5Cpublic%5Cassets%5Cimg%5Cthreads%5CAQS_Node.png" alt="AQS_Node"></p> <p>Node源码：</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">Node</span> <span class="token punctuation">{</span>
+</code></pre></div><p>state:同步状态标识，当状态标识为0时，代表着当前没有线程占用锁资源；当状态标志=0，则代表已有线程占用了锁资源，如果状态标志大于0，则代表着占用锁资源的线程重入过多次，解锁时也需要同样的解锁多次。</p> <p>head为同步队列（CLH）的头部，但需要注意点head节点为空，不存储信息，而tail指向同步队列的尾部。AQS中同步队列（CLH）采用这种方式构建双向链表结构，方便队列 进行增删操作。</p> <p>Node节点：是对每个 等待获取锁的线程的封装体。其中包含了当前执行的线程及线程的状态，如是否阻塞、是否处于等待唤醒、是否中断等。每个Node都有一个前驱节点prev以及后继节点next,这样可以更方便持有锁的线程释放后能快速执行下一个正在等待的线程。</p> <p>Node节点的示意图：</p> <p><img src="/back-end/assets/img/threads/AQS_Node.png" alt="AQS_Node"></p> <p>Node源码：</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">Node</span> <span class="token punctuation">{</span>
     <span class="token comment">// 共享模式</span>
     <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Node</span> <span class="token constant">SHARED</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 独占模式</span>
@@ -279,7 +279,7 @@ private volatile int state;
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 
-</code></pre></div><p>该方法使用for(;;)进行死循环操作，第一次循环，因此时队列中还没有节点，tail为空，则初始化一个新节点，并设置为头节点。第二次循环，tail不为空，将当前节点的前驱节点设置为新节点，使用cas操作，将当前节点指向尾节点，操作成功，则将新节点的后继节点指向当前节点。</p> <p>注意：存在同一时刻有多条线程一同操作，如果cas操作失败，则需要再次循环，直到修改成功。head节点本身是不存在任何数据，是个new的Node节点，它只是一个牵头节点，而tail永远指向尾部节点。</p> <p>示意图：</p> <p><img src="D:%5CGitHub%5Cthink-studio%5Cback-end%5Cdocs.vuepress%5Cpublic%5Cassets%5Cimg%5Cthreads%5CAQS_Node_0.png" alt="AQS_Node_0"></p> <p>当t=tail,tail为空时的执行示意图，新建的Node节点，存放再CLH队列的第一位,waitStatus为0，此时head,t，tail都是指向node节点</p> <p><img src="D:%5CGitHub%5Cthink-studio%5Cback-end%5Cdocs.vuepress%5Cpublic%5Cassets%5Cimg%5Cthreads%5CAQS_Node_1.png" alt="AQS_Node_1"></p> <p>当第二次循环，tail不为空，将当前线程(线程2)的节点的前驱节点指向t(新建的node)，再将尾部节点tail指向当前线程的节点，t的后继节点指向当前线程的节点.</p> <div class="language-java extra-class"><pre class="language-java"><code>
+</code></pre></div><p>该方法使用for(;;)进行死循环操作，第一次循环，因此时队列中还没有节点，tail为空，则初始化一个新节点，并设置为头节点。第二次循环，tail不为空，将当前节点的前驱节点设置为新节点，使用cas操作，将当前节点指向尾节点，操作成功，则将新节点的后继节点指向当前节点。</p> <p>注意：存在同一时刻有多条线程一同操作，如果cas操作失败，则需要再次循环，直到修改成功。head节点本身是不存在任何数据，是个new的Node节点，它只是一个牵头节点，而tail永远指向尾部节点。</p> <p>示意图：</p> <p><img src="/back-end/assets/img/threads/AQS_Node_0.png" alt="AQS_Node_0"></p> <p>当t=tail,tail为空时的执行示意图，新建的Node节点，存放再CLH队列的第一位,waitStatus为0，此时head,t，tail都是指向node节点</p> <p><img src="/back-end/assets/img/threads/AQS_Node_1.png" alt="AQS_Node_1"></p> <p>当第二次循环，tail不为空，将当前线程(线程2)的节点的前驱节点指向t(新建的node)，再将尾部节点tail指向当前线程的节点，t的后继节点指向当前线程的节点.</p> <div class="language-java extra-class"><pre class="language-java"><code>
     <span class="token comment">/**
      * Acquires in exclusive uninterruptible mode for thread already in
      * queue. Used by condition wait methods as well as acquire.
@@ -373,7 +373,7 @@ private volatile int state;
         <span class="token keyword">return</span> <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">interrupted</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
-</code></pre></div><p>当前线程的节点创建完成并放入队列中，此时执行acquireQueued()方法，传入的node就是当前线程的节点信息。</p> <p>acquireQueued:当前节点的线程在死循环（自旋）执行过程中，当前节点的前驱节点为头节点时，开始尝试获取锁资源。head节点是当前占有同步状态标识的线程节点，只有当head节点释放同步状态唤醒后继节点时，后继节点才可能获取同步状态。</p> <p>shouldParkAfterFailedAcquire:当前线程节点的前驱节点不是头节点或者获取锁失败，则之前该方法，将head节点或前驱节点设置为signal(-1,等待唤醒状态)，</p> <p>parkAndCheckInterrupt：将当前线程挂起，即让出CPU资源</p> <p><img src="D:%5CGitHub%5Cthink-studio%5Cback-end%5Cdocs.vuepress%5Cpublic%5Cassets%5Cimg%5Cthreads%5CAQS_Node_2.png" alt="AQS_Node_2"></p> <p>此时head节点的状态为-1（Signal等待 唤醒）。</p> <h4 id="_2-2-2-线程1释放锁"><a href="#_2-2-2-线程1释放锁" class="header-anchor">#</a> 2.2.2 线程1释放锁</h4> <div class="language-java extra-class"><pre class="language-java"><code><span class="token class-name">ReentrantLock</span><span class="token operator">:</span>
+</code></pre></div><p>当前线程的节点创建完成并放入队列中，此时执行acquireQueued()方法，传入的node就是当前线程的节点信息。</p> <p>acquireQueued:当前节点的线程在死循环（自旋）执行过程中，当前节点的前驱节点为头节点时，开始尝试获取锁资源。head节点是当前占有同步状态标识的线程节点，只有当head节点释放同步状态唤醒后继节点时，后继节点才可能获取同步状态。</p> <p>shouldParkAfterFailedAcquire:当前线程节点的前驱节点不是头节点或者获取锁失败，则之前该方法，将head节点或前驱节点设置为signal(-1,等待唤醒状态)，</p> <p>parkAndCheckInterrupt：将当前线程挂起，即让出CPU资源</p> <p><img src="/back-end/assets/img/threads/AQS_Node_2.png" alt="AQS_Node_2"></p> <p>此时head节点的状态为-1（Signal等待 唤醒）。</p> <h4 id="_2-2-2-线程1释放锁"><a href="#_2-2-2-线程1释放锁" class="header-anchor">#</a> 2.2.2 线程1释放锁</h4> <div class="language-java extra-class"><pre class="language-java"><code><span class="token class-name">ReentrantLock</span><span class="token operator">:</span>
 <span class="token comment">/**
  * 释放锁
  */</span>
@@ -529,6 +529,6 @@ private volatile int state;
       </a>
       →
     </span></p></div> </main></div><div class="global-ui"></div></div>
-    <script src="/back-end/assets/js/app.e2101455.js" defer></script><script src="/back-end/assets/js/2.733019b2.js" defer></script><script src="/back-end/assets/js/14.4726fbb0.js" defer></script>
+    <script src="/back-end/assets/js/app.7438c974.js" defer></script><script src="/back-end/assets/js/2.733019b2.js" defer></script><script src="/back-end/assets/js/14.67568e7d.js" defer></script>
   </body>
 </html>
