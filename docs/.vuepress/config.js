@@ -26,7 +26,7 @@ module.exports = {
 		                    children: [
 						'/back-end-basic/java集合/01-ArrayList源码阅读',
 						'/back-end-basic/java集合/02-LinkedList源码分析.md',
-						'/back-end-basic/java集合/Vector.md',
+						'/back-end-basic/java集合/03-Vector源码阅读.md',
 						'/back-end-basic/java集合/ArrayDeque.md',
 						'/back-end-basic/java集合/HashMap.md',
 						'/back-end-basic/java集合/Hashtable.md',
