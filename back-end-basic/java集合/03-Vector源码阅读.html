@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vector源码阅读 | 思考学习仓库</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    
+    <meta name="description" content="思考学习仓库沉淀">
+    
+    <link rel="preload" href="/back-end/assets/css/0.styles.e1ce56f9.css" as="style"><link rel="preload" href="/back-end/assets/js/app.62b2deb6.js" as="script"><link rel="preload" href="/back-end/assets/js/2.733019b2.js" as="script"><link rel="preload" href="/back-end/assets/js/34.c305804b.js" as="script">
+    <link rel="stylesheet" href="/back-end/assets/css/0.styles.e1ce56f9.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/back-end/" class="home-link router-link-active"><!----> <span class="site-name">思考学习仓库</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/back-end/" class="nav-link">
+  思考学习仓库
+</a></div><div class="nav-item"><a href="/back-end/back-end-basic/" class="nav-link router-link-active">
+  java基础
+</a></div><div class="nav-item"><a href="/back-end/middleware/" class="nav-link">
+  中间件
+</a></div><div class="nav-item"><a href="/back-end/spring/" class="nav-link">
+  Spring框架
+</a></div><div class="nav-item"><a href="/back-end/microservices/" class="nav-link">
+  微服务框架
+</a></div><div class="nav-item"><a href="/back-end/database/" class="nav-link">
+  数据库篇章
+</a></div> <a href="https://github.com/think-studio/back-end" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/back-end/" class="nav-link">
+  思考学习仓库
+</a></div><div class="nav-item"><a href="/back-end/back-end-basic/" class="nav-link router-link-active">
+  java基础
+</a></div><div class="nav-item"><a href="/back-end/middleware/" class="nav-link">
+  中间件
+</a></div><div class="nav-item"><a href="/back-end/spring/" class="nav-link">
+  Spring框架
+</a></div><div class="nav-item"><a href="/back-end/microservices/" class="nav-link">
+  微服务框架
+</a></div><div class="nav-item"><a href="/back-end/database/" class="nav-link">
+  数据库篇章
+</a></div> <a href="https://github.com/think-studio/back-end" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>java集合</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/back-end/back-end-basic/java集合/01-ArrayList源码阅读.html" class="sidebar-link">ArrayList源码阅读</a></li><li><a href="/back-end/back-end-basic/java集合/02-LinkedList源码分析.html" class="sidebar-link">LinkedList源码分析</a></li><li><a href="/back-end/back-end-basic/java集合/03-Vector源码阅读.html" class="active sidebar-link">Vector源码阅读</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/back-end/back-end-basic/java集合/03-Vector源码阅读.html#📝-vector源码分析" class="sidebar-link">📝 Vector源码分析</a></li><li class="sidebar-sub-header"><a href="/back-end/back-end-basic/java集合/03-Vector源码阅读.html#解析" class="sidebar-link">解析</a></li></ul></li><li><a href="/back-end/back-end-basic/java集合/ArrayDeque.html" class="sidebar-link">ArrayDeque</a></li><li><a href="/back-end/back-end-basic/java集合/HashMap.html" class="sidebar-link">HashMap</a></li><li><a href="/back-end/back-end-basic/java集合/Hashtable.html" class="sidebar-link">Hashtable</a></li><li><a href="/back-end/back-end-basic/java集合/LinkedHashMap.html" class="sidebar-link">LinkedHashMap</a></li><li><a href="/back-end/back-end-basic/java集合/WeakHashMap.html" class="sidebar-link">WeakHashMap</a></li><li><a href="/back-end/back-end-basic/java集合/ArrayBlockingQueue.html" class="sidebar-link">ArrayBlockingQueue</a></li><li><a href="/back-end/back-end-basic/java集合/ConcurrentHashMap.html" class="sidebar-link">ConcurrentHashMap</a></li><li><a href="/back-end/back-end-basic/java集合/ConcurrentLinkedDeque.html" class="sidebar-link">ConcurrentLinkedDeque</a></li><li><a href="/back-end/back-end-basic/java集合/ConcurrentSkipListMap.html" class="sidebar-link">ConcurrentSkipListMap</a></li><li><a href="/back-end/back-end-basic/java集合/ConcurrentSkipListSet.html" class="sidebar-link">ConcurrentSkipListSet</a></li><li><a href="/back-end/back-end-basic/java集合/CopyOnWriteArrayList.html" class="sidebar-link">CopyOnWriteArrayList</a></li><li><a href="/back-end/back-end-basic/java集合/CopyOnWriteArraySetDelayQueue.html" class="sidebar-link">CopyOnWriteArraySetDelayQueue</a></li><li><a href="/back-end/back-end-basic/java集合/LinkedBlockingDeque.html" class="sidebar-link">LinkedBlockingDeque</a></li><li><a href="/back-end/back-end-basic/java集合/LinkedBlockingQueue.html" class="sidebar-link">LinkedBlockingQueue</a></li><li><a href="/back-end/back-end-basic/java集合/PriorityBlockingQueue.html" class="sidebar-link">PriorityBlockingQueue</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>java流</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>java线程</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>java网络</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>jvm</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vector源码阅读"><a href="#vector源码阅读" class="header-anchor">#</a> Vector源码阅读</h1> <h2 id="📝-vector源码分析"><a href="#📝-vector源码分析" class="header-anchor">#</a> 📝 <strong>Vector源码分析</strong></h2> <p>分析流程参考ArrayList集合,地址如下</p> <p>https://think-studio.github.io/back-end/back-end-basic/java%E9%9B%86%E5%90%88/01-ArrayList%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB.html</p> <h2 id="解析"><a href="#解析" class="header-anchor">#</a> 解析</h2> <p>Vector比较ArrayList来说,更多的是直接在方法上进行加锁了;加锁的粒度还是比较粗的</p> <p>比如： add,set,get 等操作和读取集合的方法,都是有进行方法上synchronized进行加锁操作;方法里执行的逻辑其实和ArrayList是相似的</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/think-studio/back-end/edit/learn-warehouse/docs/back-end-basic/java集合/03-Vector源码阅读.md" target="_blank" rel="noopener noreferrer">欢迎来到思考学习仓库,一起沉淀知识</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/back-end/back-end-basic/java集合/02-LinkedList源码分析.html" class="prev">
+        LinkedList源码分析
+      </a></span> <span class="next"><a href="/back-end/back-end-basic/java集合/ArrayDeque.html">
+        ArrayDeque
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/back-end/assets/js/app.62b2deb6.js" defer></script><script src="/back-end/assets/js/2.733019b2.js" defer></script><script src="/back-end/assets/js/34.c305804b.js" defer></script>
+  </body>
+</html>
