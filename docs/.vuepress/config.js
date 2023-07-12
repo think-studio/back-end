@@ -60,7 +60,7 @@ module.exports = {
 						'/back-end-basic/java线程/01-JMM&Volatile.md',
 						'/back-end-basic/java线程/02-synchronized.md',
 						'/back-end-basic/java线程/03-ReentrantLock.md',
-						'/back-end-basic/java线程/04-AbstractQueuedSynchronizer.md',
+						'/back-end-basic/java线程/04-Semaphore.md',
 						'/back-end-basic/java线程/thread.md',
 						'/back-end-basic/java线程/threadLocal.md',
 						'/back-end-basic/java线程/Atomic系列.md',
