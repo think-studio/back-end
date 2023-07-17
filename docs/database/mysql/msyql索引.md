@@ -168,6 +168,17 @@ const 类型表示使用了主键或者唯一索引与常量值进行比较，�
 
 ### B 树索引的结构
 
+## InnoDB 是如何储存数据的
+
+InnoDB 的数据是按数据页为单位来读写的,也就是说，当需要读一条记录的时候，并不是将这个记录本身从磁盘读出来，而是以页为单位，将其整体读入缓存池。
+
+数据库的 I/O 操作的最小单位是页，InnoDB 数据页的默认大小是 16KB，意味着数据库每次读写都是以 16KB 为单位的，一次最少从磁盘中读取 16K 的内容到内存中，一次最少把内存中的 16K 内容刷新到磁盘中。
+
+数据页的结构
+
+![](https://cdn.xiaolincoding.com//mysql/other/243b1466779a9e107ae3ef0155604a17.png)
+
+各部分的作用
 参考链接
 - [8.3.1 How MySQL Uses Indexes](https://dev.mysql.com/doc/refman/8.0/en/mysql-indexes.html)
 - [8.3.9 Comparison of B-Tree and Hash Indexes](https://dev.mysql.com/doc/refman/8.0/en/index-btree-hash.html)
