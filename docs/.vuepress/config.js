@@ -195,6 +195,7 @@ module.exports = {
 						'/database/oltp/oltp型数据库.md',
 						'/database/olap/olap分析型数据库.md',
 						'/database/mpp/mpp型数据库.md',
+						'/database/mysql/InnoDB.md',
 					]
 				}, 
 			]
